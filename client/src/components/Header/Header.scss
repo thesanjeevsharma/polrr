@@ -1,0 +1,17 @@
+.Header {
+  align-items: center;
+  box-shadow: 1px 0px 5px 1px #ccc;
+  display: flex;
+  height: 60px;
+  justify-content: space-between;
+  padding: 0 32px;
+
+  &__NavList {
+    list-style-type: none;
+    display: flex;
+
+    li:not(:last-child) {
+      margin-right: 32px;
+    }
+  }
+}
