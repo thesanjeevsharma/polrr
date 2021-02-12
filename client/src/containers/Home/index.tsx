@@ -1,7 +1,9 @@
 import React from 'react'
 
-import { Loader } from 'components'
+import { ArticleCard, Loader } from 'components'
 import { Article } from 'types/article'
+
+import './Home.scss'
 
 const Home: React.FC = () => {
   const [articles, setArticles] = React.useState<Article[]>([])
@@ -23,7 +25,7 @@ const Home: React.FC = () => {
             body: JSON.stringify({
               lang: 'en',
               query: 'climate change',
-              sort: 'popularity',
+              sort: 'relevancy',
             }),
           })
         ).json()
@@ -44,11 +46,11 @@ const Home: React.FC = () => {
       {loading ? (
         <Loader />
       ) : (
-        <>
-          {articles.map((article) => (
-            <div>{article.title}</div>
+        <div className="Home__Articles">
+          {articles.map((article, index) => (
+            <ArticleCard article={article} key={index} />
           ))}
-        </>
+        </div>
       )}
     </div>
   )

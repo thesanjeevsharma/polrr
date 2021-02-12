@@ -1,0 +1,10 @@
+.Home {
+  background: var(--color-background);
+  padding: 32px;
+
+  &__Articles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 16px;
+  }
+}

@@ -1,0 +1,68 @@
+.ArticleCard {
+  background: var(--color-white);
+  border-radius: 4px;
+  box-shadow: 4px 4px 5px 1px #eaeaea;
+  color: var(--color-text-black);
+  overflow: hidden;
+  position: relative;
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    box-shadow: 6px 6px 5px 1px #cacaca;
+  }
+
+  &__Body {
+    padding: 8px;
+  }
+
+  &__CTA {
+    background: var(--color-white);
+    border: 1px solid var(--color-text-black);
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  &__Description {
+    line-height: 125%;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+
+  &__Details {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 12px;
+
+    &--light {
+      color: #666;
+      margin-right: 4px;
+    }
+  }
+
+  &__Head {
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  &__Title {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  &__Image {
+    height: 220px;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  &__Source {
+    background: var(--color-text-black);
+    bottom: 8px;
+    color: var(--color-white);
+    font-size: 14px;
+    left: 8px;
+    padding: 4px;
+    position: absolute;
+  }
+}
