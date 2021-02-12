@@ -3,10 +3,10 @@ const sa = require('superagent')
 
 router.post('/', async (req, res, next) => {
   try {
-    const { sort, query, lang } = req.body
+    const { sort, query, lang, page, pageSize } = req.body
     const { body } = await sa
       .get(
-        `${process.env.PROXY}/everything?q=${query}&sortBy=${sort}&language=${lang}`
+        `${process.env.PROXY}/everything?q=${query}&sortBy=${sort}&language=${lang}&page=${page}&pageSize=${pageSize}`
       )
       .set('X-Api-Key', process.env.API_KEY)
 
