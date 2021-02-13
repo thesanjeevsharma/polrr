@@ -1,13 +1,21 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
+import { Icon } from 'components'
 import './Header.scss'
 
 const Header: React.FC = () => {
   return (
     <div className="Header">
-      <h2 className="Header__Logo">polrr</h2>
+      <h2 className="Header__Logo">
+        <Link to="/">polrr</Link>
+      </h2>
       <ul className="Header__NavList">
-        <li> Saved </li>
+        <li>
+          <Link to="/saved">
+            <Icon name="bookmark-multiple" />
+          </Link>
+        </li>
       </ul>
     </div>
   )

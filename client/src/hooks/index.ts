@@ -7,10 +7,10 @@ export const useScrollListener = () => {
     'innerHeight' in window
       ? window.innerHeight
       : document.documentElement.offsetHeight
-  const body = document.body
+  const { body } = document
   const html = document.documentElement
 
-  const handleScroll = () => {
+  const handleScroll = React.useCallback(() => {
     const docHeight = Math.max(
       body.scrollHeight,
       body.offsetHeight,
@@ -24,12 +24,19 @@ export const useScrollListener = () => {
     } else {
       setEndReached(false)
     }
-  }
+  }, [
+    body.scrollHeight,
+    body.offsetHeight,
+    html.clientHeight,
+    html.scrollHeight,
+    html.offsetHeight,
+    windowHeight,
+  ])
 
   React.useEffect(() => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [handleScroll])
 
   return endReached
 }

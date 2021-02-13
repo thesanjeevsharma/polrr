@@ -10,10 +10,15 @@
 }
 
 * {
-  margin: 0;
   box-sizing: border-box;
+  margin: 0;
 }
 
 .App {
   font-family: 'Karla', sans-serif;
+
+  &__Body {
+    background: var(--color-background);
+    padding: 32px;
+  }
 }

@@ -4,12 +4,14 @@ export interface Source {
 }
 
 export interface Article {
-  source: Source
+  _id: string
   author: string
-  title: string
+  content: string
   description: string
+  isSaved?: boolean
+  publishedAt: Date
+  source: Source
+  title: string
   url: string
   urlToImage: string
-  publishedAt: Date
-  content: string
 }

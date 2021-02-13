@@ -1,8 +1,13 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
 
-import { Home } from 'containers'
 import { Header } from 'components'
+import { Home, Saved } from 'containers'
 
 import './styles.scss'
 
@@ -11,9 +16,13 @@ const App: React.FC = () => {
     <div className="App">
       <Router>
         <Header />
-        <Switch>
-          <Route path="/" component={Home} />
-        </Switch>
+        <div className="App__Body">
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/saved" component={Saved} />
+            <Redirect to="/" />
+          </Switch>
+        </div>
       </Router>
     </div>
   )

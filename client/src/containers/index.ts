@@ -1,3 +1,4 @@
 import Home from './Home'
+import Saved from './Saved'
 
-export { Home }
+export { Home, Saved }

@@ -1,7 +1,7 @@
 export interface NewsApiParams {
-  skip: number
-  limit: number
   from: string
+  limit: number
+  skip: number
 }
 
 export interface ApiResponse {

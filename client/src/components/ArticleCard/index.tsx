@@ -1,18 +1,26 @@
 import React from 'react'
 import TimeAgo from 'react-timeago'
 
+import { Icon } from 'components'
 import { Article } from 'types/article'
 
 import './ArticleCard.scss'
 
 interface ComponentProps {
   article: Article
+  toggleSave(article: Article): void
 }
 
-const ArticleCard: React.FC<ComponentProps> = ({ article }) => {
+const ArticleCard: React.FC<ComponentProps> = ({ article, toggleSave }) => {
   return (
     <div className="ArticleCard">
       <div className="ArticleCard__Head">
+        <button
+          className="ArticleCard__Save"
+          onClick={() => toggleSave(article)}
+        >
+          <Icon name={article.isSaved ? 'bookmark' : 'bookmark-outline'} />
+        </button>
         <span className="ArticleCard__Source"> {article.source.name} </span>
         <img
           alt={article.title}
