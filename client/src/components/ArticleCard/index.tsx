@@ -12,6 +12,8 @@ interface ComponentProps {
 }
 
 const ArticleCard: React.FC<ComponentProps> = ({ article, toggleSave }) => {
+  const openArticle = () => window.open(article.url, '_blank')
+
   return (
     <div className="ArticleCard">
       <div className="ArticleCard__Head">
@@ -39,7 +41,9 @@ const ArticleCard: React.FC<ComponentProps> = ({ article, toggleSave }) => {
         </p>
         <div className="ArticleCard__Description">{article.description}</div>
         <div className="ArticleCard__Footer">
-          <button className="ArticleCard__CTA">Read More</button>
+          <button className="ArticleCard__CTA" onClick={openArticle}>
+            Read More
+          </button>
         </div>
       </div>
     </div>
