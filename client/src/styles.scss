@@ -21,4 +21,10 @@
     background: var(--color-background);
     padding: 32px;
   }
+
+  @media (max-width: 680px) {
+    &__Body {
+      padding: 16px;
+    }
+  }
 }
