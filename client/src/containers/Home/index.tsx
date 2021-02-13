@@ -11,8 +11,8 @@ const Home: React.FC = () => {
   const [articles, setArticles] = React.useState<Article[]>([])
   const [loading, setLoading] = React.useState<Boolean>(true)
 
-  const page = React.useRef(1)
-  const pageSize = React.useRef(40)
+  const skip = React.useRef(0)
+  const limit = React.useRef(20)
 
   const endReached = useScrollListener()
 
@@ -20,20 +20,18 @@ const Home: React.FC = () => {
     ;(async () => {
       try {
         const data = await fetchNews({
-          lang: 'en',
-          query: 'climate change',
-          sort: 'relevancy',
-          page: page.current,
-          pageSize: pageSize.current,
+          skip: skip.current,
+          limit: limit.current,
+          from: 'everything',
         })
         if (data.success) {
           setArticles(data.data.articles)
+          skip.current += limit.current
         }
       } catch (error) {
         console.log(error)
       } finally {
         setLoading(false)
-        page.current += 1
       }
     })()
   }, [])
@@ -43,23 +41,21 @@ const Home: React.FC = () => {
       ;(async () => {
         try {
           const data = await fetchNews({
-            lang: 'en',
-            query: 'climate change',
-            sort: 'relevancy',
-            page: page.current,
-            pageSize: pageSize.current,
+            skip: skip.current,
+            limit: limit.current,
+            from: 'everything',
           })
           if (data.success) {
             setArticles((oldArticles) => [
               ...oldArticles,
               ...data.data.articles,
             ])
+            skip.current += limit.current
           }
         } catch (error) {
           console.log(error)
         } finally {
           setLoading(false)
-          page.current += 1
         }
       })()
     }

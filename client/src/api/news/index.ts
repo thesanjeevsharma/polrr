@@ -5,15 +5,11 @@ const url =
     ? `http://localhost:4000/api/news`
     : `/api/news`
 
-export const fetchNews = async (body: NewsApiParams): Promise<ApiResponse> => {
+export const fetchNews = async (query: NewsApiParams): Promise<ApiResponse> => {
   const data = await (
-    await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    })
+    await fetch(
+      `${url}?from=${query.from}&limit=${query.limit}&skip=${query.skip}`
+    )
   ).json()
   return data
 }

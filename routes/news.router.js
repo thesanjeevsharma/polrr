@@ -1,24 +1,17 @@
 const router = require('express').Router()
-const sa = require('superagent')
+const News = require('../models/news.model')
 
-router.post('/', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
-    const { sort, query, lang, page, pageSize } = req.body
-    const { body } = await sa
-      .get(
-        `${process.env.PROXY}/everything?q=${query}&sortBy=${sort}&language=${lang}&page=${page}&pageSize=${pageSize}`
-      )
-      .set('X-Api-Key', process.env.API_KEY)
-
-    if (body) {
-      res.status(200).json({
-        success: true,
-        message: 'News fetched!',
-        data: { articles: body.articles },
-      })
-    } else {
-      throw Error('Failed to fetch news!')
-    }
+    const { from, skip, limit } = req.query
+    const articles = await News.find({ from })
+      .skip(+skip)
+      .limit(+limit)
+    res.status(200).json({
+      success: true,
+      message: 'News fetched!',
+      data: { articles },
+    })
   } catch (error) {
     next(error)
   }

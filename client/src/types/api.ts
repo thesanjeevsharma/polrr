@@ -1,9 +1,7 @@
 export interface NewsApiParams {
-  lang: string
-  page: number
-  pageSize: number
-  query: string
-  sort: string
+  skip: number
+  limit: number
+  from: string
 }
 
 export interface ApiResponse {
