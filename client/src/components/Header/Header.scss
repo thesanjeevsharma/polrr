@@ -1,11 +1,16 @@
 .Header {
   align-items: center;
+  background: hsla(0, 0%, 100%, 0.8);
   box-shadow: 1px 0px 5px 1px #cacaca;
   color: var(--color-text-black);
   display: flex;
   height: 60px;
   justify-content: space-between;
   padding: 0 32px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 
   a {
     color: var(--color-text-black);
