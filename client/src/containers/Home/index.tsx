@@ -1,4 +1,5 @@
 import React from 'react'
+import clsx from 'clsx'
 
 import { fetchNews } from 'api'
 import { Articles, Loader } from 'components'
@@ -11,55 +12,47 @@ import './Home.scss'
 const Home: React.FC = () => {
   const [articles, setArticles] = React.useState<Article[]>([])
   const [loading, setLoading] = React.useState<boolean>(true)
+  const [from, setFrom] = React.useState<string>('everything')
 
   const skip = React.useRef(0)
   const limit = React.useRef(20)
 
   const endReached = useScrollListener()
 
-  React.useEffect(() => {
-    ;(async () => {
-      try {
-        const data = await fetchNews({
-          from: 'everything',
-          limit: limit.current,
-          skip: skip.current,
-        })
-        if (data.success) {
-          const markedArticles = markSavedArticles(data.data.articles)
-          setArticles(markedArticles)
-          skip.current += limit.current
-        }
-      } catch (error) {
-        console.log(error)
-      } finally {
-        setLoading(false)
+  const fetchNewsFunc = React.useCallback(async () => {
+    try {
+      const data = await fetchNews({
+        from,
+        limit: limit.current,
+        skip: skip.current,
+      })
+      if (data.success) {
+        const markedArticles = markSavedArticles(data.data.articles)
+        setArticles((oldArticles) => [...oldArticles, ...markedArticles])
+        skip.current += limit.current
       }
-    })()
-  }, [])
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
+  }, [from])
+
+  React.useEffect(() => {
+    fetchNewsFunc()
+  }, [fetchNewsFunc])
 
   React.useEffect(() => {
     if (endReached) {
-      ;(async () => {
-        try {
-          const data = await fetchNews({
-            from: 'everything',
-            limit: limit.current,
-            skip: skip.current,
-          })
-          if (data.success) {
-            const markedArticles = markSavedArticles(data.data.articles)
-            setArticles((oldArticles) => [...oldArticles, ...markedArticles])
-            skip.current += limit.current
-          }
-        } catch (error) {
-          console.log(error)
-        } finally {
-          setLoading(false)
-        }
-      })()
+      fetchNewsFunc()
     }
-  }, [endReached])
+  }, [endReached, fetchNewsFunc])
+
+  React.useEffect(() => {
+    skip.current = 0
+    setArticles([])
+    fetchNewsFunc()
+  }, [from, fetchNewsFunc])
 
   const toggleSaveArticleEventFired = () => {
     setArticles(markSavedArticles(articles))
@@ -70,10 +63,32 @@ const Home: React.FC = () => {
       {loading ? (
         <Loader />
       ) : (
-        <Articles
-          articles={articles}
-          toggleSaveArticleEventFired={toggleSaveArticleEventFired}
-        />
+        <>
+          <div className="Home__TabWrapper">
+            <button
+              className={clsx(
+                'Home__Tab',
+                from === 'everything' && 'Home__Tab--active'
+              )}
+              onClick={() => setFrom('everything')}
+            >
+              All
+            </button>
+            <button
+              className={clsx(
+                'Home__Tab',
+                from === 'top-headlines' && 'Home__Tab--active'
+              )}
+              onClick={() => setFrom('top-headlines')}
+            >
+              Top Picks
+            </button>
+          </div>
+          <Articles
+            articles={articles}
+            toggleSaveArticleEventFired={toggleSaveArticleEventFired}
+          />
+        </>
       )}
     </div>
   )
