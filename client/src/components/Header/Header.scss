@@ -1,6 +1,6 @@
 .Header {
   align-items: center;
-  background: hsla(0, 0%, 100%, 0.8);
+  background: var(--color-background-card);
   color: var(--color-text);
   display: flex;
   height: 72px;

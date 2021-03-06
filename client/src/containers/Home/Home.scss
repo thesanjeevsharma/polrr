@@ -1,6 +1,6 @@
 .Home {
   &__Tab {
-    background: var(--color-white);
+    background: transparent;
     border: none;
     border-bottom: 3px solid transparent;
     color: var(--color-dark-gray);
@@ -19,6 +19,7 @@
   }
 
   &__TabWrapper {
+    background: var(--color-background);
     margin-bottom: 24px;
   }
 }

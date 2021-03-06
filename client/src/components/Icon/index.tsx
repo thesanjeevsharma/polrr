@@ -5,7 +5,9 @@ import BookmarkIcon from 'mdi-react/BookmarkIcon'
 import BookmarkOutlineIcon from 'mdi-react/BookmarkOutlineIcon'
 import BookmarkMultipleIcon from 'mdi-react/BookmarkMultipleIcon'
 import CloseIcon from 'mdi-react/CloseIcon'
+import MoonWaxingCrescentIcon from 'mdi-react/MoonWaxingCrescentIcon'
 import OpenInNewIcon from 'mdi-react/OpenInNewIcon'
+import WhiteBalanceSunnyIcon from 'mdi-react/WhiteBalanceSunnyIcon'
 
 import './Icon.scss'
 
@@ -32,8 +34,12 @@ const Icon: React.FC<ComponentProps> = ({
         return <BookmarkMultipleIcon size={size} />
       case 'close':
         return <CloseIcon size={size} />
+      case 'moon':
+        return <MoonWaxingCrescentIcon size={size} />
       case 'open-in-new':
         return <OpenInNewIcon size={size} />
+      case 'sun':
+        return <WhiteBalanceSunnyIcon size={size} />
       default:
         return null
     }
