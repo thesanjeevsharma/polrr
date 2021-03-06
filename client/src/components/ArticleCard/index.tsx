@@ -1,7 +1,8 @@
 import React from 'react'
+import clsx from 'clsx'
 import TimeAgo from 'react-timeago'
 
-import { Icon } from 'components'
+import { Button, Icon } from 'components'
 import { Article } from 'types/article'
 
 import './ArticleCard.scss'
@@ -17,13 +18,6 @@ const ArticleCard: React.FC<ComponentProps> = ({ article, toggleSave }) => {
   return (
     <div className="ArticleCard">
       <div className="ArticleCard__Head">
-        <button
-          className="ArticleCard__Save"
-          onClick={() => toggleSave(article)}
-        >
-          <Icon name={article.isSaved ? 'bookmark' : 'bookmark-outline'} />
-        </button>
-        <span className="ArticleCard__Source"> {article.source.name} </span>
         <img
           alt={article.title}
           className="ArticleCard__Image"
@@ -32,18 +26,24 @@ const ArticleCard: React.FC<ComponentProps> = ({ article, toggleSave }) => {
       </div>
       <div className="ArticleCard__Body">
         <h3 className="ArticleCard__Title">{article.title}</h3>
-        <p className="ArticleCard__Details">
-          <TimeAgo
-            className="ArticleCard__Details--light"
-            date={article.publishedAt}
-          />
-          - {article.author}
-        </p>
-        <div className="ArticleCard__Description">{article.description}</div>
+        <div className="ArticleCard__Details">
+          <h4 className="ArticleCard__Source"> {article.source.name} </h4>
+          <TimeAgo className="ArticleCard__Time" date={article.publishedAt} />
+        </div>
+        <p className="ArticleCard__Description">{article.description}</p>
+        <p className="ArticleCard__Author">{article.author}</p>
         <div className="ArticleCard__Footer">
-          <button className="ArticleCard__CTA" onClick={openArticle}>
+          <Button className="ArticleCard__CTA" onClick={openArticle}>
             Read More
-          </button>
+          </Button>
+          <Icon
+            name={article.isSaved ? 'bookmark' : 'bookmark-outline'}
+            className={clsx(
+              'ArticleCard__Save',
+              article.isSaved && 'ArticleCard__Save--filled'
+            )}
+            onClick={() => toggleSave(article)}
+          />
         </div>
       </div>
     </div>
