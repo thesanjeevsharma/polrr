@@ -5,13 +5,12 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "heroku-prebuild": "cd client && npm i && npm run build --prod",
+    "heroku-prebuild": "cd client && yarn && yarn run build",
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "climate",
-    "change",
+    "climate change",
     "news"
   ],
   "author": "Sanjeev Sharma",
