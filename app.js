@@ -21,6 +21,7 @@ mongoose
   .catch((err) => console.log(err))
 
 // middlewares
+app.use(express.static(__dirname + '/client/build'))
 app.use(express.json())
 app.use(cors())
 
@@ -31,7 +32,7 @@ job.everything.start()
 // routes
 app.use('/api/news', NewsRouter)
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html')
+  res.sendFile('index.html')
 })
 
 // error handler
