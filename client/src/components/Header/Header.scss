@@ -20,8 +20,14 @@
     display: flex;
     list-style-type: none;
 
-    li:not(:last-child) {
-      margin-right: 32px;
+    &-item {
+      &--active {
+        color: var(--color-primary);
+      }
+
+      &:not(:last-child) {
+        margin-right: 32px;
+      }
     }
   }
 

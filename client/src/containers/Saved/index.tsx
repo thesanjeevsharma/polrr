@@ -35,7 +35,7 @@ const Home: React.FC = () => {
         <Loader />
       ) : (
         <>
-          <h3 className="Saved__Count">Total saved: {articles.length}</h3>
+          <div className="Saved__Count">Saved Articles({articles.length})</div>
           <Articles
             articles={articles}
             toggleSaveArticleEventFired={toggleSaveArticleEventFired}
