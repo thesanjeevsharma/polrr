@@ -5,6 +5,7 @@ router.get('/', async (req, res, next) => {
   try {
     const { from, skip, limit } = req.query
     const articles = await News.find({ from })
+      .sort({ publishedAt: 1 })
       .skip(+skip)
       .limit(+limit)
     res.status(200).json({

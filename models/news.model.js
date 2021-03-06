@@ -27,7 +27,7 @@ const NewsSchema = new mongoose.Schema(
       type: String,
     },
     publishedAt: {
-      type: String,
+      type: Date,
     },
     content: {
       type: String,
