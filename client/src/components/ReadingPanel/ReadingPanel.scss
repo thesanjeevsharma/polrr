@@ -1,9 +1,9 @@
 .ReadingPanel {
   background: var(--color-background);
-  height: calc(100vh - 80px);
+  height: calc(100vh - 72px);
   position: fixed;
   right: -100%;
-  top: 80px;
+  top: 72px;
   transition: 0.3s ease-in-out all;
   width: 60vw;
 
@@ -27,5 +27,10 @@
 
   @media (max-width: 920px) {
     width: 100%;
+  }
+
+  @media (max-width: 680px) {
+    height: calc(100vh - 60px);
+    top: 60px;
   }
 }

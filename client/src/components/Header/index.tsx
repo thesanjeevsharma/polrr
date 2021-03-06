@@ -11,11 +11,9 @@ const Header: React.FC = () => {
 
   return (
     <div className="Header">
-      <h2 className="Header__Logo">
-        <Link to="/">
-          <img alt="polrr logo" src={Logo} />
-        </Link>
-      </h2>
+      <Link to="/">
+        <img alt="polrr logo" className="Header__Logo" src={Logo} />
+      </Link>
       <ul className="Header__NavList">
         <li
           className={clsx(

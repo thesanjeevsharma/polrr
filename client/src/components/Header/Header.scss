@@ -3,7 +3,7 @@
   background: hsla(0, 0%, 100%, 0.8);
   color: var(--color-text);
   display: flex;
-  height: 80px;
+  height: 72px;
   justify-content: space-between;
   padding: 0 32px;
   position: -webkit-sticky;
@@ -14,6 +14,10 @@
   a {
     color: var(--color-text-black);
     text-decoration: none;
+  }
+
+  &__Logo {
+    width: 120px;
   }
 
   &__NavList {
@@ -32,6 +36,11 @@
   }
 
   @media (max-width: 680px) {
+    height: 60px;
     padding: 0 16px;
+
+    &__Logo {
+      width: 100px;
+    }
   }
 }
