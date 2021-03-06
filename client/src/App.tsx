@@ -6,7 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom'
 
-import { Header } from 'components'
+import { Header, ReadingPanel } from 'components'
 import { Home, Saved } from 'containers'
 
 import './styles.scss'
@@ -16,6 +16,7 @@ const App: React.FC = () => {
     <div className="App">
       <Router>
         <Header />
+        <ReadingPanel />
         <div className="App__Body">
           <Switch>
             <Route exact path="/" component={Home} />

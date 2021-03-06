@@ -3,6 +3,9 @@ import clsx from 'clsx'
 import TimeAgo from 'react-timeago'
 
 import { Button, Icon } from 'components'
+import { IFRAME_ALLOWED } from 'constants/index'
+import { useAppDispatch } from 'store/hooks'
+import { current } from 'store/features/newsSlice'
 import { Article } from 'types/article'
 
 import './ArticleCard.scss'
@@ -13,7 +16,17 @@ interface ComponentProps {
 }
 
 const ArticleCard: React.FC<ComponentProps> = ({ article, toggleSave }) => {
-  const openArticle = () => window.open(article.url, '_blank')
+  const dispatch = useAppDispatch()
+
+  const isExternal = !IFRAME_ALLOWED.includes(article.source.name)
+
+  const openArticle = (): void => {
+    if (isExternal) {
+      window.open(article.url, '_blank')
+    } else {
+      dispatch(current(article))
+    }
+  }
 
   return (
     <div className="ArticleCard">
@@ -35,6 +48,13 @@ const ArticleCard: React.FC<ComponentProps> = ({ article, toggleSave }) => {
         <div className="ArticleCard__Footer">
           <Button className="ArticleCard__CTA" onClick={openArticle}>
             Read More
+            {isExternal && (
+              <Icon
+                className="ArticleCard__CTA-icon"
+                name="open-in-new"
+                size={14}
+              />
+            )}
           </Button>
           <Icon
             name={article.isSaved ? 'bookmark' : 'bookmark-outline'}

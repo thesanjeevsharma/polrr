@@ -4,10 +4,12 @@ import { Article } from 'types/article'
 
 interface NewsState {
   articles: Article[]
+  currentlyReading: Article | null
 }
 
 const initialState: NewsState = {
   articles: [],
+  currentlyReading: null,
 }
 
 export const newsSlice = createSlice({
@@ -17,10 +19,13 @@ export const newsSlice = createSlice({
     add: (state, action: PayloadAction<Article[]>) => {
       state.articles = [...state.articles, ...action.payload]
     },
+    current: (state, action: PayloadAction<Article | null>) => {
+      state.currentlyReading = action.payload
+    },
   },
 })
 
-export const { add } = newsSlice.actions
+export const { add, current } = newsSlice.actions
 
 export const selectArticle = (state: RootState) => state.news
 
