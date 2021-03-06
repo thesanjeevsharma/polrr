@@ -3,6 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 
+const config = require('./config')
 const job = require('./cron')
 const NewsRouter = require('./routes/news.router')
 
@@ -10,7 +11,7 @@ const app = express()
 
 // db connection
 mongoose
-  .connect('mongodb://localhost:27017/polrr', {
+  .connect(config.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
