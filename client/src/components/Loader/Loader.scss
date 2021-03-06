@@ -1,0 +1,20 @@
+.Loader {
+  color: var(--color-primary);
+  display: grid;
+  height: 100%;
+  place-items: center;
+  width: 100%;
+
+  &__icon {
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotateZ(0);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
