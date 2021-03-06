@@ -4,4 +4,8 @@ export const IFRAME_ALLOWED: string[] = [
   'Tech Crunch',
   'Reuters',
   'NPR',
+  'BreakingNews.ie',
+  'Stuff.co.nz',
+  'THISDAY Newspapers',
+  'Daily Mail',
 ]
