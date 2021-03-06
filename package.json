@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "heroku-prebuild": "cd client && yarn && yarn run build",
+    "heroku-prebuild": "cd client && yarn install --production=false && yarn run build",
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
