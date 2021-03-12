@@ -1,3 +1,4 @@
+import { LIMIT } from 'constants/index'
 import { ApiResponse, NewsApiParams } from 'types/api'
 
 const url =
@@ -5,11 +6,11 @@ const url =
     ? `http://localhost:4000/api/news`
     : `/api/news`
 
-export const fetchNews = async (query: NewsApiParams): Promise<ApiResponse> => {
+export const fetchNewsApi = async (
+  query: NewsApiParams
+): Promise<ApiResponse> => {
   const data = await (
-    await fetch(
-      `${url}?from=${query.from}&limit=${query.limit}&skip=${query.skip}`
-    )
+    await fetch(`${url}/?from=${query.from}&limit=${LIMIT}&skip=${query.skip}`)
   ).json()
   return data
 }

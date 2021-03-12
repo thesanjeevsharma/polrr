@@ -24,6 +24,6 @@
     "superagent": "^6.1.0"
   },
   "engines": {
-    "node": "14.x"
+    "node": ">=12.x"
   }
 }

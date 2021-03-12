@@ -1,6 +1,5 @@
 export interface NewsApiParams {
   from: string
-  limit: number
   skip: number
 }
 

@@ -9,3 +9,5 @@ export const IFRAME_ALLOWED: string[] = [
   'THISDAY Newspapers',
   'Daily Mail',
 ]
+
+export const LIMIT = 20

@@ -12,10 +12,9 @@ import './ArticleCard.scss'
 
 interface ComponentProps {
   article: Article
-  toggleSave(article: Article): void
 }
 
-const ArticleCard: React.FC<ComponentProps> = ({ article, toggleSave }) => {
+const ArticleCard: React.FC<ComponentProps> = ({ article }) => {
   const dispatch = useAppDispatch()
 
   const isExternal = !IFRAME_ALLOWED.includes(article.source.name)
@@ -62,7 +61,6 @@ const ArticleCard: React.FC<ComponentProps> = ({ article, toggleSave }) => {
               'ArticleCard__Save',
               article.isSaved && 'ArticleCard__Save--filled'
             )}
-            onClick={() => toggleSave(article)}
           />
         </div>
       </div>

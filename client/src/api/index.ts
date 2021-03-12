@@ -1,3 +1,3 @@
-import { fetchNews } from './news'
+import { fetchNewsApi } from './news'
 
-export { fetchNews }
+export { fetchNewsApi }
