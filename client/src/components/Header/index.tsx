@@ -11,6 +11,10 @@ const Header: React.FC = () => {
   const { pathname } = useLocation()
   const [theme, setTheme] = React.useState<string>('light')
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
   const handleThemeChange = React.useCallback(() => {
     const alternateTheme = theme === 'light' ? 'dark' : 'light'
     setTheme(alternateTheme)
