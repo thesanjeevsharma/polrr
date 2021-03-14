@@ -4,11 +4,12 @@ import TimeAgo from 'react-timeago'
 
 import { Button, Icon } from 'components'
 import { IFRAME_ALLOWED } from 'constants/index'
-import { useAppDispatch } from 'store/hooks'
+import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { current } from 'store/features/newsSlice'
 import { Article } from 'types/article'
 
 import './ArticleCard.scss'
+import { toggleSave } from 'store/features/userSlice'
 
 interface ComponentProps {
   article: Article
@@ -16,6 +17,7 @@ interface ComponentProps {
 
 const ArticleCard: React.FC<ComponentProps> = ({ article }) => {
   const dispatch = useAppDispatch()
+  const { isLoggedIn, token, user } = useAppSelector((state) => state.user)
 
   const isExternal = !IFRAME_ALLOWED.includes(article.source.name)
 
@@ -25,6 +27,10 @@ const ArticleCard: React.FC<ComponentProps> = ({ article }) => {
     } else {
       dispatch(current(article))
     }
+  }
+
+  const save = (): void => {
+    dispatch(toggleSave({ articleId: article._id, token: token! }))
   }
 
   return (
@@ -55,13 +61,21 @@ const ArticleCard: React.FC<ComponentProps> = ({ article }) => {
               />
             )}
           </Button>
-          <Icon
-            name={article.isSaved ? 'bookmark' : 'bookmark-outline'}
-            className={clsx(
-              'ArticleCard__Save',
-              article.isSaved && 'ArticleCard__Save--filled'
-            )}
-          />
+          {isLoggedIn && (
+            <Icon
+              name={
+                user?.savedArticles.includes(article._id)
+                  ? 'bookmark'
+                  : 'bookmark-outline'
+              }
+              className={clsx(
+                'ArticleCard__Save',
+                user?.savedArticles.includes(article._id) &&
+                  'ArticleCard__Save--filled'
+              )}
+              onClick={save}
+            />
+          )}
         </div>
       </div>
     </div>

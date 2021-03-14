@@ -6,6 +6,7 @@ const cors = require('cors')
 const config = require('./config')
 const job = require('./cron')
 const NewsRouter = require('./routes/news.router')
+const UserRouter = require('./routes/user.router')
 
 const app = express()
 
@@ -31,6 +32,7 @@ job.everything.start()
 
 // routes
 app.use('/api/news', NewsRouter)
+app.use('/api/user', UserRouter)
 app.get('/', (req, res) => {
   res.sendFile('index.html')
 })

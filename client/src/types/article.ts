@@ -8,7 +8,6 @@ export interface Article {
   author: string
   content: string
   description: string
-  isSaved?: boolean
   publishedAt: Date
   source: Source
   title: string
