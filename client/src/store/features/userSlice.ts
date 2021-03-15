@@ -1,17 +1,29 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { userDetailsApi, userLoginApi, toggleSaveApi } from 'api/user'
+import {
+  userDetailsApi,
+  userLoginApi,
+  userSavedArticlesApi,
+  toggleSaveApi,
+} from 'api/user'
 import { RootState } from 'store'
 import { UserLoginApiParams } from 'types/api'
+import { Article } from 'types/article'
 import { User } from 'types/user'
 
 interface UserState {
   isLoggedIn: boolean
+  likedArticles: Article[]
+  savedArticles: Article[]
+  status: 'pending' | 'fulfilled' | 'rejected'
   token: string | null
   user: User | null
 }
 
 const initialState: UserState = {
   isLoggedIn: false,
+  likedArticles: [],
+  savedArticles: [],
+  status: 'pending',
   token: null,
   user: null,
 }
@@ -64,6 +76,21 @@ export const toggleSave = createAsyncThunk(
   }
 )
 
+export const loadSavedArticles = createAsyncThunk(
+  'user/loadSavedArticles',
+  async (token: string, { rejectWithValue }) => {
+    try {
+      const response = await userSavedArticlesApi(token)
+      if (response.success) {
+        return response.data
+      }
+      throw Error(response.message)
+    } catch (error) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
+
 export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(loginUser.fulfilled, (state, action) => {
@@ -92,6 +119,16 @@ export const userSlice = createSlice({
       state.token = null
       state.isLoggedIn = false
       localStorage.removeItem('polrr-token')
+    })
+    builder.addCase(loadSavedArticles.fulfilled, (state, action) => {
+      state.savedArticles = action.payload.articles
+      state.status = 'fulfilled'
+    })
+    builder.addCase(loadSavedArticles.pending, (state) => {
+      state.status = 'pending'
+    })
+    builder.addCase(loadSavedArticles.rejected, (state) => {
+      state.status = 'rejected'
     })
   },
   initialState,

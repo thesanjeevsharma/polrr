@@ -102,21 +102,23 @@ const Header: React.FC = () => {
         >
           <Link to="/">Home</Link>
         </li>
-        {/* <li
-          className={clsx(
-            'Header__NavList-item',
-            pathname === '/saved' && 'Header__NavList-item--active'
-          )}
-        >
-          <Link to="/saved">Saved</Link>
-        </li> */}
         {isLoggedIn ? (
-          <Button
-            className={clsx('Header__NavList-item')}
-            onClick={() => dispatch(logout())}
-          >
-            Logout
-          </Button>
+          <>
+            <li
+              className={clsx(
+                'Header__NavList-item',
+                pathname === '/saved' && 'Header__NavList-item--active'
+              )}
+            >
+              <Link to="/saved">Saved</Link>
+            </li>
+            <Button
+              className={clsx('Header__NavList-item')}
+              onClick={() => dispatch(logout())}
+            >
+              Logout
+            </Button>
+          </>
         ) : (
           <GoogleLogin
             clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID!}

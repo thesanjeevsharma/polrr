@@ -33,6 +33,21 @@ export const userDetailsApi = async (token: string): Promise<ApiResponse> => {
   return data
 }
 
+export const userSavedArticlesApi = async (
+  token: string
+): Promise<ApiResponse> => {
+  const data = await (
+    await fetch(`${url}/saved`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      method: 'GET',
+    })
+  ).json()
+  return data
+}
+
 export const toggleSaveApi = async (
   articleId: string,
   token: string

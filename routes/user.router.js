@@ -117,4 +117,30 @@ router.get('/', jwtMiddleware.authenticate, async (req, res, next) => {
   }
 })
 
+router.get('/saved', jwtMiddleware.authenticate, async (req, res, next) => {
+  try {
+    const { id } = req.decoded
+
+    const user = await User.findById(id).populate('savedArticles')
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found!',
+        data: null,
+      })
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'User details fetched!',
+      data: {
+        articles: user.savedArticles,
+      },
+    })
+  } catch (error) {
+    next(error)
+  }
+})
+
 module.exports = router
