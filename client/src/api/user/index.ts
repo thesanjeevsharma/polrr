@@ -20,6 +20,19 @@ export const userLoginApi = async (
   return data
 }
 
+export const userDetailsApi = async (token: string): Promise<ApiResponse> => {
+  const data = await (
+    await fetch(`${url}/`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      method: 'GET',
+    })
+  ).json()
+  return data
+}
+
 export const toggleSaveApi = async (
   articleId: string,
   token: string
@@ -30,7 +43,7 @@ export const toggleSaveApi = async (
         articleId,
       }),
       headers: {
-        Authorization: `Bearer ${token}`,
+        authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       method: 'POST',

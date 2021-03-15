@@ -29,9 +29,6 @@ router.post('/google-login', async (req, res, next) => {
       expiresIn: '30d',
     })
 
-    console.log(token)
-    console.log(user)
-
     res.status(200).json({
       success: true,
       message: 'User logged in!',
@@ -87,5 +84,37 @@ router.post(
     }
   }
 )
+
+router.get('/', jwtMiddleware.authenticate, async (req, res, next) => {
+  try {
+    const { id } = req.decoded
+
+    const user = await User.findById(id)
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found!',
+        data: null,
+      })
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'User details fetched!',
+      data: {
+        user: {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          profileImage: user.profileImage,
+          savedArticles: user.savedArticles,
+          likedArticles: user.likedArticles,
+        },
+      },
+    })
+  } catch (error) {
+    next(error)
+  }
+})
 
 module.exports = router

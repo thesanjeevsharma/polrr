@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { userLoginApi, toggleSaveApi } from 'api/user'
+import { userDetailsApi, userLoginApi, toggleSaveApi } from 'api/user'
 import { RootState } from 'store'
 import { UserLoginApiParams } from 'types/api'
 import { User } from 'types/user'
@@ -21,6 +21,21 @@ export const loginUser = createAsyncThunk(
   async (userDetails: UserLoginApiParams, { rejectWithValue }) => {
     try {
       const response = await userLoginApi(userDetails)
+      if (response.success) {
+        return response.data
+      }
+      throw Error(response.message)
+    } catch (error) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
+
+export const loadUser = createAsyncThunk(
+  'user/loadUser',
+  async (token: string, { rejectWithValue }) => {
+    try {
+      const response = await userDetailsApi(token)
       if (response.success) {
         return response.data
       }
@@ -66,6 +81,17 @@ export const userSlice = createSlice({
       if (state.user) {
         state.user.savedArticles = action.payload.savedArticles
       }
+    })
+    builder.addCase(loadUser.fulfilled, (state, action) => {
+      state.isLoggedIn = true
+      state.user = action.payload.user
+      state.token = action.meta.arg
+    })
+    builder.addCase(loadUser.rejected, (state) => {
+      state.user = null
+      state.token = null
+      state.isLoggedIn = false
+      localStorage.removeItem('polrr-token')
     })
   },
   initialState,
