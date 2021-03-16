@@ -6,6 +6,7 @@ import BookmarkOutlineIcon from 'mdi-react/BookmarkOutlineIcon'
 import BookmarkMultipleIcon from 'mdi-react/BookmarkMultipleIcon'
 import CloseIcon from 'mdi-react/CloseIcon'
 import LoadingIcon from 'mdi-react/LoadingIcon'
+import MenuIcon from 'mdi-react/MenuIcon'
 import MoonWaxingCrescentIcon from 'mdi-react/MoonWaxingCrescentIcon'
 import OpenInNewIcon from 'mdi-react/OpenInNewIcon'
 import WhiteBalanceSunnyIcon from 'mdi-react/WhiteBalanceSunnyIcon'
@@ -37,6 +38,8 @@ const Icon: React.FC<ComponentProps> = ({
         return <CloseIcon size={size} />
       case 'loading':
         return <LoadingIcon size={size} />
+      case 'menu':
+        return <MenuIcon size={size} />
       case 'moon':
         return <MoonWaxingCrescentIcon size={size} />
       case 'open-in-new':

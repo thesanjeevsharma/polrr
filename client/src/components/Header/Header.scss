@@ -20,6 +20,43 @@
     width: 120px;
   }
 
+  &__MobileNav {
+    display: none;
+
+    &List {
+      background: var(--color-background);
+      left: 0;
+      list-style: none;
+      padding: 32px 16px;
+      position: fixed;
+      top: -100vh;
+      transition: 0.5s ease-in-out all;
+      width: 100%;
+
+      &--open {
+        top: 0px;
+      }
+
+      &-item {
+        margin-bottom: 16px;
+
+        &--active {
+          color: var(--color-primary);
+        }
+
+        &:first-of-type {
+          text-align: right;
+        }
+
+        &-icon {
+          &:not(:last-child) {
+            margin-right: 16px;
+          }
+        }
+      }
+    }
+  }
+
   &__NavList {
     align-items: center;
     display: flex;
@@ -43,5 +80,14 @@
     &__Logo {
       width: 100px;
     }
+
+    &__MobileNav {
+      display: block;
+    }
+
+    &__NavList {
+      display: none;
+    }
+
   }
 }
