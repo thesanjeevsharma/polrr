@@ -39,6 +39,7 @@ const ArticleCard: React.FC<ComponentProps> = ({ article }) => {
         <img
           alt={article.title}
           className="ArticleCard__Image"
+          loading="lazy"
           src={article.urlToImage}
         />
       </div>
