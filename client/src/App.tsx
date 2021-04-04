@@ -6,7 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom'
 
-import { Header, ReadingPanel } from 'components'
+import { Header, Footer, ReadingPanel } from 'components'
 import { Home, Saved } from 'containers'
 import { loadUser, logout } from 'store/features/userSlice'
 import { useAppDispatch } from 'store/hooks'
@@ -37,6 +37,7 @@ const App: React.FC = () => {
             <Redirect to="/" />
           </Switch>
         </div>
+        <Footer />
       </Router>
     </div>
   )
