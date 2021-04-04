@@ -17,6 +17,7 @@ interface UserState {
   status: 'pending' | 'fulfilled' | 'rejected'
   token: string | null
   user: User | null
+  userStatus: 'pending' | 'fulfilled' | 'rejected'
 }
 
 const initialState: UserState = {
@@ -26,6 +27,7 @@ const initialState: UserState = {
   status: 'pending',
   token: null,
   user: null,
+  userStatus: 'pending',
 }
 
 export const loginUser = createAsyncThunk(
@@ -109,16 +111,21 @@ export const userSlice = createSlice({
         state.user.savedArticles = action.payload.savedArticles
       }
     })
+    builder.addCase(loadUser.pending, (state, action) => {
+      state.userStatus = 'pending'
+    })
     builder.addCase(loadUser.fulfilled, (state, action) => {
       state.isLoggedIn = true
       state.user = action.payload.user
       state.token = action.meta.arg
+      state.userStatus = 'fulfilled'
     })
     builder.addCase(loadUser.rejected, (state) => {
       state.user = null
       state.token = null
       state.isLoggedIn = false
       localStorage.removeItem('polrr-token')
+      state.userStatus = 'rejected'
     })
     builder.addCase(loadSavedArticles.fulfilled, (state, action) => {
       state.savedArticles = action.payload.articles
@@ -138,6 +145,7 @@ export const userSlice = createSlice({
       state.user = null
       state.token = null
       state.isLoggedIn = false
+      state.userStatus = 'fulfilled'
       localStorage.removeItem('polrr-token')
     },
   },

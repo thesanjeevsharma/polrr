@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router'
 
 import { Articles, Loader } from 'components'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
@@ -8,14 +9,24 @@ import { loadSavedArticles } from 'store/features/userSlice'
 
 const Home: React.FC = () => {
   const dispatch = useAppDispatch()
-  const { savedArticles, status } = useAppSelector((state) => state.user)
+  const history = useHistory()
+  const {
+    savedArticles,
+    status,
+    isLoggedIn,
+    token,
+    userStatus,
+  } = useAppSelector((state) => state.user)
 
   React.useEffect(() => {
-    const token = localStorage.getItem('polrr-token')
-    if (token) {
-      dispatch(loadSavedArticles(token))
+    if (userStatus !== 'pending') {
+      if (isLoggedIn && token) {
+        dispatch(loadSavedArticles(token))
+      } else {
+        history.replace('/')
+      }
     }
-  }, [dispatch])
+  }, [dispatch, isLoggedIn, history, token, userStatus])
 
   if (status === 'rejected') return <p>Something went wrong!</p>
   return (
