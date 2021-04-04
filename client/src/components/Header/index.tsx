@@ -271,6 +271,7 @@ const MobileNav: React.FC<NavProps> = ({
             buttonText="Login"
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
+            onScriptLoadFailure={(res) => console.log(res)}
             cookiePolicy={'single_host_origin'}
             render={(renderProps: any) => (
               <Button
