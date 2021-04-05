@@ -1,4 +1,19 @@
 .Home {
+  &__FinishedMessage {
+    color: var(--color-primary);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  &__LoadMoreBtn {
+    background: var(--color-background);
+    color: var(--color-primary);
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    width: 100%;
+  }
+
   &__Tab {
     background: transparent;
     border: none;

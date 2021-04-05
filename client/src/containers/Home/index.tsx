@@ -2,7 +2,7 @@ import React from 'react'
 import clsx from 'clsx'
 
 import { fetchNews } from 'store/features/newsSlice'
-import { Articles, Loader } from 'components'
+import { Articles, Button, Loader } from 'components'
 import { LIMIT } from 'constants/index'
 import { useScrollListener } from 'hooks'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
@@ -11,12 +11,12 @@ import './Home.scss'
 
 const Home: React.FC = () => {
   const dispatch = useAppDispatch()
-  const { articles, status } = useAppSelector((state) => state.news)
+  const { articles, count, loadMoreStatus, status } = useAppSelector(
+    (state) => state.news
+  )
 
   const [from, setFrom] = React.useState<string>('everything')
   const [skip, setSkip] = React.useState<number>(0)
-
-  const endReached = useScrollListener()
 
   React.useEffect(() => {
     dispatch(
@@ -28,17 +28,10 @@ const Home: React.FC = () => {
   }, [dispatch, from, skip])
 
   React.useEffect(() => {
-    if (endReached) {
-      setSkip((oldSkip) => oldSkip + LIMIT)
-    }
-  }, [endReached])
-
-  React.useEffect(() => {
     setSkip(0)
   }, [from])
 
   if (status === 'rejected') return <p>Oops! Something went wrong.</p>
-
   return (
     <div className="Home">
       {status === 'pending' ? (
@@ -66,6 +59,17 @@ const Home: React.FC = () => {
             </button>
           </div>
           <Articles articles={articles} />
+          {articles.length < count ? (
+            <Button
+              className="Home__LoadMoreBtn"
+              disabled={loadMoreStatus === 'pending'}
+              onClick={() => setSkip((oldSkip) => oldSkip + LIMIT)}
+            >
+              {loadMoreStatus === 'pending' ? <Loader /> : 'Load More'}
+            </Button>
+          ) : (
+            <p className="Home__FinishedMessage"> You're all caught up! </p>
+          )}
         </>
       )}
     </div>

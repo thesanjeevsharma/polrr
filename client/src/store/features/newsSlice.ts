@@ -6,13 +6,17 @@ import { NewsApiParams } from 'types/api'
 
 interface NewsState {
   articles: Article[]
+  count: number
   currentlyReading: Article | null
+  loadMoreStatus: 'pending' | 'fulfilled' | 'rejected'
   status: 'pending' | 'fulfilled' | 'rejected'
 }
 
 const initialState: NewsState = {
   articles: [],
+  count: 0,
   currentlyReading: null,
+  loadMoreStatus: 'fulfilled',
   status: 'pending',
 }
 
@@ -25,7 +29,7 @@ export const fetchNews = createAsyncThunk(
         skip,
       })
       if (response.success) {
-        return response.data.articles
+        return response.data
       }
       throw Error(response.message)
     } catch (error) {
@@ -38,21 +42,28 @@ export const newsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchNews.fulfilled, (state, action) => {
       state.status = 'fulfilled'
+      state.loadMoreStatus = 'fulfilled'
       if (action.meta.arg.skip === 0) {
-        state.articles = action.payload
+        state.articles = action.payload.articles
+        state.count = action.payload.count
       } else {
-        state.articles = [...state.articles, ...action.payload]
+        state.articles = [...state.articles, ...action.payload.articles]
       }
     })
     builder.addCase(fetchNews.pending, (state, action) => {
       if (action.meta.arg.skip === 0) {
         state.status = 'pending'
       } else {
+        state.loadMoreStatus = 'pending'
         state.status = 'fulfilled'
       }
     })
     builder.addCase(fetchNews.rejected, (state, action) => {
-      state.status = 'rejected'
+      if (action.meta.arg.skip === 0) {
+        state.status = 'rejected'
+      } else {
+        state.loadMoreStatus = 'rejected'
+      }
     })
   },
   initialState,
