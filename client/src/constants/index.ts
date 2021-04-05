@@ -8,6 +8,23 @@ export const IFRAME_ALLOWED: string[] = [
   'Stuff.co.nz',
   'THISDAY Newspapers',
   'Daily Mail',
+  'Business Insider',
+  'Blog.google',
+  'Guardian Nigeria',
+  'Tech Explorist',
+  'RT',
+  'ScienceAlert',
+  'The Washington Post',
+  'Toronto Sun',
+  'Phys.Org',
+  'Firstpost',
+  'Chicago Tribune',
+  'MENAFN.COM',
+  'Sky.com',
+  'The Scottish Sun',
+  'CNA',
+  'Environment Journal',
+  'NBC News',
 ]
 
 export const LIMIT = 20
