@@ -1,5 +1,5 @@
 {
-  "name": "polrr",
+  "name": "polrr - Climate Change News",
   "short_name": "polrr",
   "icons": [
     {
@@ -13,7 +13,8 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#4C9A60",
+  "start_url": ".",
+  "theme_color": "#4c9a60",
   "background_color": "#ffffff",
   "display": "standalone"
 }

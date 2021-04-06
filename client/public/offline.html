@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>polrr | Climate Change News</title>
+</head>
+<style>
+   body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      color: #4c9a60;
+      font-size: 24px;
+      font-weight: 500;
+      background: #fff;
+   }
+</style>
+
+<body>
+   Oops! Looks like you're offline.
+   <script>
+      const theme = localStorage.getItem('theme') ?? 'light';
+      document.body.style.background = theme === 'light' ? '#fff' : '#262a35';
+   </script>
+</body>
+
+</html>
