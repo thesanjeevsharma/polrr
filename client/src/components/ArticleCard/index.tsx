@@ -10,6 +10,7 @@ import { Article } from 'types/article'
 
 import './ArticleCard.scss'
 import { toggleSave } from 'store/features/userSlice'
+import ImageFallback from 'components/ImageFallback'
 
 interface ComponentProps {
   article: Article
@@ -36,12 +37,16 @@ const ArticleCard: React.FC<ComponentProps> = ({ article }) => {
   return (
     <div className="ArticleCard">
       <div className="ArticleCard__Head">
-        <img
-          alt={article.title}
-          className="ArticleCard__Image"
-          loading="lazy"
-          src={article.urlToImage}
-        />
+        {article.urlToImage ? (
+          <img
+            alt={article.title}
+            className="ArticleCard__Image"
+            loading="lazy"
+            src={article.urlToImage}
+          />
+        ) : (
+          <ImageFallback text={article.source.name} />
+        )}
       </div>
       <div className="ArticleCard__Body">
         <h3 className="ArticleCard__Title">{article.title}</h3>

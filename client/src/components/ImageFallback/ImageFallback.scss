@@ -1,0 +1,12 @@
+.ImageFallback {
+  display: grid;
+  height: inherit;
+  place-items: center;
+  width: inherit;
+
+  &__Initials {
+    color: var(--color-primary);
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+}
