@@ -27,8 +27,10 @@ app.use(express.json())
 app.use(cors())
 
 // cron jobs
-job.topHeadlines.start()
-job.everything.start()
+if (process.env.NODE_ENV !== 'development') {
+  job.topHeadlines.start()
+  job.everything.start()
+}
 
 // routes
 app.use('/api/news', NewsRouter)
