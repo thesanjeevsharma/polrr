@@ -21,14 +21,14 @@ const Footer = () => {
           </p>
         </div>
         <div className="Footer__right">
-          <div className="Footer__title">Credits</div>
+          <div className="Footer__title">Developer</div>
           <a
             className="Footer__link"
-            href="https://www.linkedin.com/in/joy-essien/"
+            href="https://www.linkedin.com/in/thesanjeevsharma/"
             rel="noreferrer"
             target="_blank"
           >
-            Joy Essien (Design)
+            Sanjeev Sharma
           </a>
         </div>
       </div>
