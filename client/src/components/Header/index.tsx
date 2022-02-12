@@ -8,7 +8,7 @@ import { AnyAction } from 'redux'
 import clsx from 'clsx'
 
 import Logo from 'assets/svgs/logo.svg'
-import { Button, Icon } from 'components'
+import { Button, Container, Icon } from 'components'
 import { loginUser, logout } from 'store/features/userSlice'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 
@@ -17,7 +17,7 @@ import './Header.scss'
 const Header: React.FC = () => {
   const { pathname } = useLocation()
   const dispatch = useAppDispatch()
-  const { isLoggedIn, user } = useAppSelector((state) => state.user)
+  const { isLoggedIn } = useAppSelector((state) => state.user)
   const [theme, setTheme] = React.useState<string>('light')
 
   React.useEffect(() => {
@@ -25,7 +25,6 @@ const Header: React.FC = () => {
   }, [pathname])
 
   const responseGoogle = (res: any) => {
-    console.log(res)
     if (res.profileObj) {
       const userDetails = {
         email: res.profileObj.email,
@@ -77,7 +76,7 @@ const Header: React.FC = () => {
     } else {
       document.documentElement.style.setProperty(
         '--color-background',
-        '#FFFFFF'
+        '#EFEFEF'
       )
       document.documentElement.style.setProperty(
         '--color-background-card',
@@ -93,26 +92,28 @@ const Header: React.FC = () => {
   }, [theme])
 
   return (
-    <div className="Header">
-      <Link to="/">
-        <img alt="polrr logo" className="Header__Logo" src={Logo} />
-      </Link>
-      <WebNav
-        dispatch={dispatch}
-        handleThemeChange={handleThemeChange}
-        isLoggedIn={isLoggedIn}
-        pathname={pathname}
-        responseGoogle={responseGoogle}
-        theme={theme}
-      />
-      <MobileNav
-        dispatch={dispatch}
-        handleThemeChange={handleThemeChange}
-        isLoggedIn={isLoggedIn}
-        pathname={pathname}
-        responseGoogle={responseGoogle}
-        theme={theme}
-      />
+    <div className="Header__Wrapper">
+      <Container className="Header">
+        <Link to="/">
+          <img alt="polrr logo" className="Header__Logo" src={Logo} />
+        </Link>
+        <WebNav
+          dispatch={dispatch}
+          handleThemeChange={handleThemeChange}
+          isLoggedIn={isLoggedIn}
+          pathname={pathname}
+          responseGoogle={responseGoogle}
+          theme={theme}
+        />
+        <MobileNav
+          dispatch={dispatch}
+          handleThemeChange={handleThemeChange}
+          isLoggedIn={isLoggedIn}
+          pathname={pathname}
+          responseGoogle={responseGoogle}
+          theme={theme}
+        />
+      </Container>
     </div>
   )
 }
