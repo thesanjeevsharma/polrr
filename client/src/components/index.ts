@@ -1,6 +1,7 @@
 import Articles from './Articles'
 import ArticleCard from './ArticleCard'
 import Button from './Button'
+import Container from './Container'
 import Footer from './Footer'
 import Header from './Header'
 import Icon from './Icon'
@@ -11,6 +12,7 @@ export {
   Articles,
   ArticleCard,
   Button,
+  Container,
   Footer,
   Header,
   Icon,

@@ -1,5 +1,4 @@
 .Footer {
-  background: var(--color-primary);
   color: var(--color-white);
 
   &__bottom {
@@ -27,6 +26,10 @@
     grid-template-columns: 70% 30%;
     padding: 48px;
     padding-bottom: 24px;
+  }
+
+  &__Wrapper {
+    background: var(--color-primary);
   }
 
   @media (max-width: 680px) {

@@ -2,9 +2,8 @@ import React from 'react'
 import clsx from 'clsx'
 
 import { fetchNews } from 'store/features/newsSlice'
-import { Articles, Button, Loader } from 'components'
+import { Articles, Button, Loader, Container } from 'components'
 import { LIMIT } from 'constants/index'
-import { useScrollListener } from 'hooks'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 
 import './Home.scss'
@@ -37,7 +36,7 @@ const Home: React.FC = () => {
       {status === 'pending' ? (
         <Loader />
       ) : (
-        <>
+        <Container>
           <div className="Home__TabWrapper">
             <button
               className={clsx(
@@ -70,7 +69,7 @@ const Home: React.FC = () => {
           ) : (
             <p className="Home__FinishedMessage"> You're all caught up! </p>
           )}
-        </>
+        </Container>
       )}
     </div>
   )
