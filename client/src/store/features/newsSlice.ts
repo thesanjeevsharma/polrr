@@ -32,7 +32,7 @@ export const fetchNews = createAsyncThunk(
         return response.data
       }
       throw Error(response.message)
-    } catch (error) {
+    } catch (error: any) {
       return rejectWithValue(error.message)
     }
   }

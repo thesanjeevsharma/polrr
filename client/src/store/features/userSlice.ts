@@ -39,7 +39,7 @@ export const loginUser = createAsyncThunk(
         return response.data
       }
       throw Error(response.message)
-    } catch (error) {
+    } catch (error: any) {
       return rejectWithValue(error.message)
     }
   }
@@ -54,7 +54,7 @@ export const loadUser = createAsyncThunk(
         return response.data
       }
       throw Error(response.message)
-    } catch (error) {
+    } catch (error: any) {
       return rejectWithValue(error.message)
     }
   }
@@ -72,7 +72,7 @@ export const toggleSave = createAsyncThunk(
         return response.data
       }
       throw Error(response.message)
-    } catch (error) {
+    } catch (error: any) {
       return rejectWithValue(error.message)
     }
   }
@@ -87,7 +87,7 @@ export const loadSavedArticles = createAsyncThunk(
         return response.data
       }
       throw Error(response.message)
-    } catch (error) {
+    } catch (error: any) {
       return rejectWithValue(error.message)
     }
   }
@@ -111,7 +111,7 @@ export const userSlice = createSlice({
         state.user.savedArticles = action.payload.savedArticles
       }
     })
-    builder.addCase(loadUser.pending, (state, action) => {
+    builder.addCase(loadUser.pending, (state) => {
       state.userStatus = 'pending'
     })
     builder.addCase(loadUser.fulfilled, (state, action) => {

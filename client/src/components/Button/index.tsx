@@ -10,9 +10,17 @@ interface ComponentProps {
   onClick(): void
 }
 
-const Button: React.FC<ComponentProps> = ({ children, className, onClick }) => {
+const Button: React.FC<ComponentProps> = ({
+  children,
+  className,
+  disabled,
+  onClick,
+}) => {
   return (
-    <button className={clsx('Button', className)} onClick={onClick}>
+    <button
+      className={clsx('Button', className, disabled && 'Button--disabled')}
+      onClick={onClick}
+    >
       {children}
     </button>
   )
